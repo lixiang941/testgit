@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin:0px; padding:0px;}
+		#box{width:100px;height:100px;background:pink;position:absolute;}
+	</style>
+</head>
+<body>
+	<img  src="./1.jpg" id="box" style="top:0px;left:0px;">
+</body>
+<script>
+	//找对象
+		var box = document.getElementById('box');
+	//鼠标按下事件
+	box.onmousedown = function(e){
+
+		var e = e || event;
+		//计算鼠标坐标相对于元素的位置
+		var y =e.clientY -parseInt(box.style.top);
+		var x = e.clientX -parseInt(box.style.left); 
+
+
+		document.onmousemove = function(e){
+			var e = e || event;
+			document.title= "X:"+e.clientX+"Y:"+e.clientY;
+
+			//让div放置到鼠标的横纵坐标上
+			box.style.left = e.clientX -x +'px';
+			box.style.top = e.clientY -y + 'px';
+		}
+	}
+
+	//鼠标弹起事件弹起之后让你的鼠标移动事件null
+	box.onmouseup = function(){
+		document.onmousemove = null;
+	}
+</script>
+</html>
